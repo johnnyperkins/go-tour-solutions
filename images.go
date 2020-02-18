@@ -15,24 +15,24 @@ import "image"
 import "image/color"
 
 type Image struct{
-	width int
-	height int
+  width int
+  height int
 }
 
 func (img Image) ColorModel() color.Model {
-	return color.RGBAModel
+  return color.RGBAModel
 }
 
 func (img Image) Bounds() image.Rectangle {
-	return image.Rect(0, 0, img.width, img.height)
+  return image.Rect(0, 0, img.width, img.height)
 }
 
 func (img Image) At(x, y int) color.Color {
-	return color.RGBA{uint8(x+y), uint8(x-y), 255, 255}
-	// return color.RGBA{uint8(x*y), uint8(x*y), 255, 255}
+  return color.RGBA{uint8(x+y), uint8(x-y), 255, 255}
+  // return color.RGBA{uint8(x*y), uint8(x*y), 255, 255}
 }
 
 func main() {
-	m := Image{1024, 512}
-	pic.ShowImage(m)
+  m := Image{1024, 512}
+  pic.ShowImage(m)
 }

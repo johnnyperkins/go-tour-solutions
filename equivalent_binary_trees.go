@@ -27,47 +27,47 @@ import "fmt"
 // Walk walks the tree t sending all values
 // from the tree to the channel ch.
 func Walk(t *tree.Tree, ch chan int) {
-	WalkTree(t, ch)
-	close(ch)
+  WalkTree(t, ch)
+  close(ch)
 }
 
 func WalkTree(t *tree.Tree, ch chan int) {
-	if t.Right != nil {
-		WalkTree(t.Right, ch)
-	}
+  if t.Right != nil {
+    WalkTree(t.Right, ch)
+  }
 
-	ch <- t.Value
+  ch <- t.Value
 
-	if t.Left != nil {
-		WalkTree(t.Left, ch)
-	}
+  if t.Left != nil {
+    WalkTree(t.Left, ch)
+  }
 }
 
 // Same determines whether the trees
 // t1 and t2 contain the same values.
 func Same(t1, t2 *tree.Tree) bool {
-	ch1, ch2 := make(chan int), make(chan int)
+  ch1, ch2 := make(chan int), make(chan int)
 
-	go Walk(t1, ch1)
-	go Walk(t2, ch2)
+  go Walk(t1, ch1)
+  go Walk(t2, ch2)
 
-	for v1 := range ch1 {
-		if v1 != <-ch2 {
-			return false
-		}
-	}
+  for v1 := range ch1 {
+    if v1 != <-ch2 {
+      return false
+    }
+  }
 
-	return true
+  return true
 }
 
 func main() {
-	ch := make(chan int)
-	go Walk(tree.New(1), ch)
+  ch := make(chan int)
+  go Walk(tree.New(1), ch)
 
-	/*for x := range ch {
-		fmt.Println(x)
-	}*/
+  /*for x := range ch {
+    fmt.Println(x)
+  }*/
 
-	fmt.Println("should be true: ", Same(tree.New(1), tree.New(1)))
-	fmt.Println("should be false: ", Same(tree.New(3), tree.New(2)))
+  fmt.Println("should be true: ", Same(tree.New(1), tree.New(1)))
+  fmt.Println("should be false: ", Same(tree.New(3), tree.New(2)))
 }

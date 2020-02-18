@@ -17,23 +17,23 @@ func Pic(dx, dy int) [][]uint8 {
  z := make([]uint8, dx)
 
  for i := range x {
- 	for ii := range z {
-		f := ii
-		if f > 128 {
-			f = 128 - ii
-		} else {
-			f = 128 + ii
-		}
- 		z[ii] = uint8(f)
-	 }
+   for ii := range z {
+    f := ii
+    if f > 128 {
+      f = 128 - ii
+    } else {
+      f = 128 + ii
+    }
+     z[ii] = uint8(f)
+   }
 
-	x[i] = z
+  x[i] = z
  }
 
  return x
 }
 
 func main() {
-	pic.Show(Pic)
+  pic.Show(Pic)
 }
 

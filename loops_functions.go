@@ -20,25 +20,25 @@ Next, change the loop condition to stop once the value has stopped changing (or 
 package main
 
 import (
-	"fmt"
+  "fmt"
 )
 
 func Sqrt(x float64) float64 {
-	z := x / 2
-	prev := z
+  z := x / 2
+  prev := z
 
-	for i := 0.0; i < 10; i++ {
-		z -= (z*z - x) / (2*z)
-		if z == prev {
-			break
-		}
-		prev = z
-		fmt.Println(z)
-	}
+  for i := 0.0; i < 10; i++ {
+    z -= (z*z - x) / (2*z)
+    if z == prev {
+      break
+    }
+    prev = z
+    fmt.Println(z)
+  }
 
-	return z
+  return z
 }
 
 func main() {
-	fmt.Println(Sqrt(81))
+  fmt.Println(Sqrt(81))
 }
